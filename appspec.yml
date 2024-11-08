@@ -3,4 +3,4 @@ os: linux
 
 files:
   - source: /
-    destination: /var/www/demoapp
+destination: /var/www/demoapp
