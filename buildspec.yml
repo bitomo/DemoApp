@@ -14,9 +14,8 @@ phases:
       - dotnet publish MvcWeb/Ecom.Web.csproj --configuration Release --runtime linux-x64 --self-contained true -o ./publish/MvcWeb
       - dotnet publish RazorWeb/RazorWeb.csproj --configuration Release --runtime linux-x64 --self-contained true -o ./publish/RazorWeb
       - echo Copying appspec.yml to publish directories
-      - cp appspec.yml ./publish/MvcWeb
-      - cp appspec.yml ./publish/RazorWeb
       - cp appspec.yml ./publish
+      - cp -r ./scripts ./publish
       - echo Build directory structure for verification
       - ls -R ./publish
 
@@ -28,5 +27,4 @@ phases:
 artifacts:
   files:
     - "publish/**/*"
-    - "scripts/*"
   discard-paths: no
