@@ -1,0 +1,59 @@
+﻿@model List<Company>
+
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h1>Company List</h1>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Company" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add company</a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped" width="100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Street address</th>
+            <th>City</th>
+            <th>Phone number</th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(() => {
+
+            $('table').DataTable({
+                ajax: '/admin/company/getall',
+                columns: [
+                    { data: "name" },
+                    { data: "streetAddress" },
+                    { data: "city" },
+                    { data: "phoneNumber" },
+                    {
+                        data: "id",
+                        render: (id) => {
+                            return `<div class="w-75 btn-group">
+                                            <a href="/admin/company/upsert?id=${id}" class="btn btn-primary mx-2">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                            </a>
+
+                                            <a href="/admin/company/delete?id=${id}" class="btn btn-danger mx-2">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                            </a>
+                                        </div>
+                                        `
+                        }
+                    }
+                    // { "defaultContent": "" }
+                ]
+            });
+        })
+    </script>
+}

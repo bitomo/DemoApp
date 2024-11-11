@@ -1,0 +1,83 @@
+﻿@model List<Product>
+
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h1>Product List</h1>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Create product</a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped" width="100%">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Author</th>
+            <th>List price</th>
+            <th>Category</th>
+            <th></th>
+        </tr>
+    </thead>
+    @*   <tbody>
+    @foreach (var product in Model)
+    {
+    <tr>
+    <td>@product.Title</td>
+    <td>@product.Description</td>
+    <td>@product.Author</td>
+    <td>@product.ListPrice</td>
+    <td>@product.Category?.Name</td>
+    <td>
+    <div class="w-75 btn-group">
+    <a asp-controller="Product" asp-action="Upsert" asp-route-id="@product.Id" class="btn btn-primary mx-2">
+    <i class="bi bi-pencil-square"></i> Edit
+    </a>
+    <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger mx-2">
+    <i class="bi bi-trash-fill"></i> Delete
+    </a>
+    </div>
+    </td>
+    </tr>
+    }
+    </tbody> *@
+</table>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(() => {
+
+            $('table').DataTable({
+                ajax: '/admin/product/getall',
+                columns: [
+                    { data: "title" },
+                    { data: "description" },
+                    { data: "author" },
+                    { data: "listPrice" },
+                    { data: "category.name" },
+                    {
+                        data: "id",
+                        render: (id) => {
+                            return `<div class="w-75 btn-group">
+                                    <a href="/admin/product/upsert?id=${id}" class="btn btn-primary mx-2">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+
+                                    <a href="/admin/product/delete?id=${id}" class="btn btn-danger mx-2">
+                                    <i class="bi bi-trash-fill"></i> Delete
+                                    </a>
+                                </div>
+                                `
+                        }
+                    }
+                    // { "defaultContent": "" }
+                ]
+            });
+        })
+    </script>
+}

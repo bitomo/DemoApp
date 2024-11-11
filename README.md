@@ -1,1 +1,1 @@
-# DemoApp
+# mvc-ecommerce
