@@ -16,6 +16,7 @@ phases:
       - echo Copying appspec.yml to publish directories
       - cp appspec.yml ./publish/MvcWeb
       - cp appspec.yml ./publish/RazorWeb
+      - cp appspec.yml ./publish
       - echo Build directory structure for verification
       - ls -R ./publish
 
