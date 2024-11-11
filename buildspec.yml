@@ -27,4 +27,5 @@ phases:
 artifacts:
   files:
     - "publish/**/*"
+    - "scripts/*"
   discard-paths: no
